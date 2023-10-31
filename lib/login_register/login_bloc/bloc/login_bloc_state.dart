@@ -1,10 +1,14 @@
 part of 'login_bloc_bloc.dart';
 
-@immutable
+
 sealed class LoginBlocState {}
 
 final class LoginBlocInitial extends LoginBlocState {}
 
+
+
+
+//password text field states
 class LoginTextFieldPasswordErrorState extends LoginBlocState{
   String errorMessage;
   LoginTextFieldPasswordErrorState({required this.errorMessage});
@@ -12,6 +16,9 @@ class LoginTextFieldPasswordErrorState extends LoginBlocState{
 class LoginTextFieldPasswordSuccessState extends LoginBlocState{}
 
 
+
+
+//Email text field states
 class LoginTextFieldEmailErrorState extends LoginBlocState{
   String errorMessage;
   LoginTextFieldEmailErrorState({required this.errorMessage});
@@ -20,8 +27,10 @@ class LoginTextFieldEmailErrorState extends LoginBlocState{
 class LoginTextFieldEmailSuccessState extends LoginBlocState{}
 
 
-class LoginSuccessState extends LoginBlocState{}
 
+
+//login states
+class LoginSuccessState extends LoginBlocState{}
 
 class LoginFailedState extends LoginBlocState{
   String errorMessage;
@@ -30,21 +39,32 @@ class LoginFailedState extends LoginBlocState{
 
 class LoginLoadingState extends LoginBlocState{}
 
-class LoginOtpValidState extends LoginBlocState{}
 
-class LoginOtpInvalidState extends LoginBlocState{
+
+
+//forgot password
+class ForgotPasswordInitialState extends LoginBlocState{}
+
+
+class ForgotPasswordOtpValidState extends LoginBlocState{}
+
+
+class ForgotPasswordOtpInvalidState extends LoginBlocState{
   String errorMessage;
-  LoginOtpInvalidState({required this.errorMessage});
+  ForgotPasswordOtpInvalidState({required this.errorMessage});
 }
 
-class LoginOtpLengthErrorState extends LoginBlocState{}
+class ForgotPasswordOtpLengthErrorState extends LoginBlocState{
+    String errorMessage;
+  ForgotPasswordOtpLengthErrorState({required this.errorMessage});
+}
 
 
-class LoginOtpSuccessState extends LoginBlocState{}
+class ForgotPasswordOtpSuccessState extends LoginBlocState{}
 
-class LoginOtpFailedState extends LoginBlocState{
+class ForgotPasswordOtpFailedState extends LoginBlocState{
   String errorMessage;
-  LoginOtpFailedState({required this.errorMessage});
+  ForgotPasswordOtpFailedState({required this.errorMessage});
 }
 
 class ForgotNewPasswordTextChangedErrorState extends LoginBlocState{
@@ -58,6 +78,9 @@ class ForgotConfirmPasswordTextChangedErrorState extends LoginBlocState{
 }
 
 class ForgotPasswordLoadingState extends LoginBlocState{}
+
+
+class ForgotPasswordChangPasswordState extends LoginBlocState{}
 
 class ForgotPasswordSuccessState extends LoginBlocState{
   String successMessage;

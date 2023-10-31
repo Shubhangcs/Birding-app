@@ -1,8 +1,5 @@
-import 'package:chirpp/home_page/pages/main_home.dart';
-import 'package:chirpp/landingPages/ui/scrolling_menu.dart';
-import 'package:chirpp/login_register/ui/login_page.dart';
-import 'package:chirpp/login_register/ui/register_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 import 'generated_routes.dart';
@@ -11,6 +8,7 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   final appDocumentsDirectory = await path_provider.getApplicationDocumentsDirectory();
   Hive.init(appDocumentsDirectory.path);
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
   runApp(const MyApp());
 }
 

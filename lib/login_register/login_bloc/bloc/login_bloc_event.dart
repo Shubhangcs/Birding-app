@@ -1,30 +1,39 @@
 part of 'login_bloc_bloc.dart';
 
-@immutable
+
 sealed class LoginBlocEvent {}
 
-
+//email test events
 class LoginTextPasswordChangedEvent extends LoginBlocEvent{
   String passwordValue;
   LoginTextPasswordChangedEvent({required this.passwordValue});
 }
+
+//password test events
 class LoginTextEmailChangedEvent extends LoginBlocEvent{
   String emailValue;
   LoginTextEmailChangedEvent({required this.emailValue});
 }
 
+//login final events
 class LoginSubmitEvent extends LoginBlocEvent{
   String email;
   String password;
   LoginSubmitEvent({required this.email , required this.password});
 }
 
-class LoginForgotPasswordOtpEvent extends LoginBlocEvent{}
+//forgot password events
+class ForgotPasswordInitialEvent extends LoginBlocEvent{}
+
+class ForgotPasswordOtpEvent extends LoginBlocEvent{
+  String email;
+  ForgotPasswordOtpEvent({required this.email});
+}
 
 
-class LoginPasswordChangeEvent extends LoginBlocEvent{
+class ForgotPasswordOtpTextChangeEvent extends LoginBlocEvent{
   String otp;
-  LoginPasswordChangeEvent({ required this.otp});
+  ForgotPasswordOtpTextChangeEvent({ required this.otp});
 }
 
 class ForgotPasswordChangePasswordEvent extends LoginBlocEvent{

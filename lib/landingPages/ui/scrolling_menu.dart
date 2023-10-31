@@ -1,12 +1,12 @@
 import 'package:chirpp/landingPages/ui/screen1.dart';
 import 'package:chirpp/landingPages/ui/screen2.dart';
 import 'package:chirpp/landingPages/ui/screen3.dart';
-import 'package:chirpp/login_register/ui/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../login_register/login_bloc/bloc/login_bloc_bloc.dart';
+import '../../login_register/ui/login.dart';
 
 class ScrollingMenu extends StatefulWidget {
   const ScrollingMenu({super.key});
@@ -49,7 +49,7 @@ class _ScrollingMenuState extends State<ScrollingMenu> {
                 MaterialPageRoute(
                   builder: (context) => BlocProvider(
                     create: (context) => LoginBloc(),
-                    child: const LoginPage(),
+                    child: const Login(),
                   ),
                 ),
               );
@@ -95,7 +95,7 @@ class _ScrollingMenuState extends State<ScrollingMenu> {
                               MaterialPageRoute(
                                 builder: (context) => BlocProvider(
                                   create: (context) => LoginBloc(),
-                                  child: const LoginPage(),
+                                  child: const Login(),
                                 ),
                               ),
                             );

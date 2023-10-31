@@ -40,6 +40,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       }
     });
     on<RegisterSubmitEvent>((event, emit) async {
+      final box = await Hive.openBox("UserDetails");
       if (!isValidMail(event.email)) {
         emit(RegisterEmailErrorState(errorMessage: "Enter a valid Email"));
       } else if (event.password.length < 8) {
@@ -58,11 +59,15 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
             body: jsonEncode(req),
             headers: {"Content-Type": "application/json"});
         final jsonResponse = jsonDecode(response.body);
-        if (!jsonResponse['status']) {
+        if (response.statusCode >= 400) {
           emit(RegisterOtpFailedState(
-              errorMessage: "An error occured while sending otp"));
+              errorMessage: jsonResponse['message']));
         } else {
+          await box.put("Name", "${event.firstName} ${event.lastName}");
+          await box.put("Email", event.email);
+          await box.put("Password", event.password);
           emit(RegisterOtpState());
+          await box.close();
         }
       }
     });
@@ -73,24 +78,25 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       } else {
         final box = await Hive.openBox("UserDetails");
         final requestJson = {
-          "fullName": "${event.firstName} ${event.lastName}",
-          "email": event.email,
-          "password": event.password,
+          "fullName": box.get('Name'),
+          "email": box.get('Email'),
+          "password": box.get('Password'),
           "otp": event.otp
         };
         final req = await http.post(Uri.parse(register),
             body: jsonEncode(requestJson),
             headers: {"Content-Type": "application/json"});
         final response = jsonDecode(req.body);
-        if (!response['status']) {
+        if (req.statusCode >= 400) {
           emit(RegisterFailedState(errorMessage: response['message']));
+          await box.delete('Name');
+         await box.delete('Email');
+         await box.delete('Password');
+         await box.close();
         } else {
-          await box.put("Name", "${event.firstName} ${event.lastName}");
-          await box.put("Email", event.email);
-          await box.put("Password", event.password);
           emit(RegisterSuccessState());
+          await box.close();
         }
-        await box.close();
       } 
     });
   }

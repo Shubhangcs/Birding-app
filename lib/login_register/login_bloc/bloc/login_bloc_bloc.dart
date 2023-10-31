@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:chirpp/constants.dart';
-import 'package:chirpp/login_register/register_bloc/bloc/register_bloc.dart';
-import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 part 'login_bloc_event.dart';
@@ -17,6 +15,8 @@ final bool emailValid =
 
 class LoginBloc extends Bloc<LoginBlocEvent, LoginBlocState> {
   LoginBloc() : super(LoginBlocInitial()) {
+
+    //login blocs
     on<LoginTextPasswordChangedEvent>((event, emit) {
       if(event.passwordValue.length < 8){
         emit(LoginTextFieldPasswordErrorState(errorMessage: "Password Length Must Be 8 Characters"));
@@ -44,39 +44,44 @@ class LoginBloc extends Bloc<LoginBlocEvent, LoginBlocState> {
           emit(LoginLoadingState());
           final response = await http.post(Uri.parse(login) , body: jsonEncode(req) , headers: {"Content-Type":"application/json"});
           final jsonResponse = jsonDecode(response.body);
-          if(!jsonResponse['status']){
-            emit(LoginFailedState(errorMessage: jsonResponse['message']));
+          if(response.statusCode >= 400){
+            emit(LoginFailedState(errorMessage: jsonResponse['error']));
           }else{
             emit(LoginSuccessState());
           }
       }
     });
-    on<LoginForgotPasswordOtpEvent>((event, emit) async {
+
+    //forgot password blocs
+    on<ForgotPasswordOtpEvent>((event, emit) async {
       final box = await Hive.openBox('UserDetails');
-     final req = {"newUser": false, "email": box.get('Email') };
-     emit(LoginLoadingState());
+     final req = {"newUser": false, "email": event.email };
+     emit(ForgotPasswordLoadingState());
      final response = await http.post(Uri.parse(verification) , body: jsonEncode(req) , headers: {"Content-Type":"application/json"});
      final jsonResponse = jsonDecode(response.body);
-     if(!jsonResponse['status']){
-      emit(LoginOtpInvalidState(errorMessage: jsonResponse['message']));
+     if(response.statusCode >= 400){
+      emit(ForgotPasswordOtpInvalidState(errorMessage: jsonResponse['message']));
      }else{
-      emit(LoginOtpValidState());
+      box.put('Email', event.email);
+      emit(ForgotPasswordOtpValidState());
+      await box.close();
      }
-     await box.close();
     });
-    on<LoginPasswordChangeEvent>((event, emit) async {
+    on<ForgotPasswordOtpTextChangeEvent>((event, emit) async {
       if(event.otp.length < 5){
-        emit(LoginOtpLengthErrorState());
+        emit(ForgotPasswordOtpLengthErrorState(errorMessage: 'Enter a valid OTP'));
       }else{
         final req = {
           "otp":event.otp
         };
+        emit(ForgotPasswordLoadingState());
         final response = await http.post(Uri.parse(verifyOtp) , body: jsonEncode(req) , headers: {"Content-Type":"application/json"});
         final jsonResponse = jsonDecode(response.body);
-        if(!jsonResponse['status']){
-          emit(LoginOtpFailedState(errorMessage: jsonResponse['message']));
+         print(jsonResponse);
+        if(response.statusCode >= 400){
+          emit(ForgotPasswordOtpFailedState(errorMessage: jsonResponse['message']));
         }else{
-          emit(LoginOtpSuccessState());
+          emit(ForgotPasswordOtpSuccessState());
         }
       }
     });
@@ -92,18 +97,18 @@ class LoginBloc extends Bloc<LoginBlocEvent, LoginBlocState> {
       }else{
         final req = {
           "email": box.get('Email'),
-          "password":event.newPassword
+          "password":event.newPassword,
         };
         emit(ForgotPasswordLoadingState());
         final response = await http.put(Uri.parse(changePassword) , body: jsonEncode(req) , headers: {"Content-Type":"application/json"});
         final jsonResponse = jsonDecode(response.body);
-        if(!jsonResponse['status']){
+        if(response.statusCode >= 400){
           emit(ForgotPasswordFailedState(errorMessage: jsonResponse['message']));
         }else{
           emit(ForgotPasswordSuccessState(successMessage: "Password Changed Successfully"));
+          await box.close();
         }
       }
-      await box.close();
     });
   }
 }

@@ -18,30 +18,38 @@ class _MainHomeState extends State<MainHome> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: IndexedStack(
-          index: _pageIndex,
-          children: [
-            const HomePage(),
-            SearchPage(
-              searchBloc: SearchBloc(),
-            ),
-            const SettingsPage(),
-          ],
-        ),
-        bottomNavigationBar: CurvedNavigationBar(
-          items: const [
-            Icon(Icons.home),
-            Icon(Icons.search),
-            Icon(Icons.settings),
-          ],
-          backgroundColor: const Color(0xFFA4BE7B),
-          onTap: (value) {
-            setState(() {
-              _pageIndex = value;
-            });
-          },
+    return Container(
+      color:const Color(0xFF40A858),
+      child: SafeArea(
+        child: Scaffold(
+          backgroundColor:const Color(0xFF40A858),
+          body: IndexedStack(
+            index: _pageIndex,
+            children: [
+               HomePage(
+                searchBloc: SearchBloc(),
+               ),
+              SearchPage(
+                searchBloc: SearchBloc(),
+              ),
+              const SettingsPage(),
+            ],
+          ),
+          bottomNavigationBar: CurvedNavigationBar(
+            items: const [
+              Icon(Icons.home , color: Colors.white,),
+              Icon(Icons.search , color: Colors.white,),
+              Icon(Icons.settings , color: Colors.white,),
+            ],
+            backgroundColor:  Colors.white,
+            onTap: (value) {
+              setState(() {
+                _pageIndex = value;
+              });
+            },
+            buttonBackgroundColor:const Color(0xFF40A858),
+            color:const Color(0xFF40A858),
+          ),
         ),
       ),
     );

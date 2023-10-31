@@ -32,10 +32,6 @@ class RegisterSubmitEvent extends RegisterEvent{
 }
 
 class RegisterOtpEvent extends RegisterEvent{
-  String lastName;
-  String firstName;
-  String email;
-  String password;
   String otp;
-  RegisterOtpEvent({required this.otp , required this.email , required this.password , required this.firstName , required this.lastName});
+  RegisterOtpEvent({required this.otp });
 }
