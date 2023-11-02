@@ -1,26 +1,29 @@
+import 'package:chirpp/bird_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 import 'generated_routes.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   final appDocumentsDirectory = await path_provider.getApplicationDocumentsDirectory();
   Hive.init(appDocumentsDirectory.path);
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
-  runApp(const MyApp());
+  final box = await Hive.openBox('authentication');
+  runApp( MyApp(token: box.get('token')));
+  await box.close();
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final dynamic token;
+  const MyApp({super.key , required this.token});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       onGenerateRoute: Routes.onGenerate,
-      initialRoute: "/login",
+      initialRoute: (token == null)?"/landingPage":(JwtDecoder.isExpired(token) == false)?"/mainHome":"/login",
       title: "Chirpp Club",
     );
   }

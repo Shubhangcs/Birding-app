@@ -1,18 +1,18 @@
-import 'package:chirpp/home_page/pages/bird_page.dart';
-import 'package:chirpp/home_page/pages/home_page.dart';
-import 'package:chirpp/home_page/pages/main_home.dart';
-import 'package:chirpp/home_page/pages/settings_page.dart';
-import 'package:chirpp/landingPages/ui/scrolling_menu.dart';
-import 'package:chirpp/login_register/register_bloc/bloc/register_bloc.dart';
-import 'package:chirpp/login_register/ui/login.dart';
-import 'package:chirpp/login_register/ui/password_change.dart';
-import 'package:chirpp/login_register/ui/verification.dart';
+import 'package:chirpp/pages/landingPages/scrolling_menu.dart';
+import 'package:chirpp/pages/main/home/main_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'home_page/bloc/bloc/search_bloc.dart';
-import 'login_register/login_bloc/bloc/login_bloc_bloc.dart';
-import 'login_register/ui/forgot_password.dart';
-import 'login_register/ui/register.dart';
+import 'pages/blocs/login_bloc/login_bloc_bloc.dart';
+import 'pages/blocs/register_bloc/register_bloc.dart';
+import 'pages/blocs/search_bloc/search_bloc.dart';
+import 'pages/main/authentication/forgot_password.dart';
+import 'pages/main/authentication/login.dart';
+import 'pages/main/authentication/password_change.dart';
+import 'pages/main/authentication/register.dart';
+import 'pages/main/authentication/verification.dart';
+import 'pages/main/home/home_page.dart';
+import 'pages/main/home/settings_page.dart';
+import 'pages/main/sub_pages/bird_page.dart';
 
 class Routes {
   static Route? onGenerate(RouteSettings settings) {
@@ -46,12 +46,6 @@ class Routes {
                   create: (context) => SearchBloc(),
                   child:  HomePage(searchBloc: SearchBloc(),),
                 ));
-      case "/settingsPage":
-        return MaterialPageRoute(
-            builder: (context) => BlocProvider(
-                  create: (context) => SearchBloc(),
-                  child: const SettingsPage(),
-                ));
       case "/birdPage":
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
@@ -77,11 +71,6 @@ class Routes {
             builder: (context) => BlocProvider(
                   create: (context) => RegisterBloc(),
                   child:const Verification(),
-                ));
-      default:
-        return MaterialPageRoute(
-            builder: (context) => const Scaffold(
-                  backgroundColor: Colors.green,
                 ));
     }
   }
