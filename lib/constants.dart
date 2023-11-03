@@ -8,3 +8,4 @@ const changePassword = "$url/set_password";
 
 const initialSearchData = "$url/search_fields";
 const finalSearchData = "$url/search_birds";
+const birdDetails = "$url//bird_moreinfo";

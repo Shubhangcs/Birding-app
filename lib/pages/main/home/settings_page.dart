@@ -40,7 +40,10 @@ class _SettingsPageState extends State<SettingsPage> {
         return Scaffold(
           backgroundColor: const Color(0xFF40A858),
           appBar: AppBar(
-            title: const Center(child: Text('Settings')),
+            title: Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Text('Settings' , style: GoogleFonts.varelaRound(color: Colors.white , fontWeight: FontWeight.bold , fontSize: 25) ,),
+            ),
             automaticallyImplyLeading: false,
             backgroundColor: const Color(0xFF40A858),
             elevation: 0,
@@ -48,6 +51,7 @@ class _SettingsPageState extends State<SettingsPage> {
           body: Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
+            margin:const EdgeInsets.only(top: 15),
             decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20),

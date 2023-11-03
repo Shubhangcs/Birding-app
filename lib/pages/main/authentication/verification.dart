@@ -17,6 +17,11 @@ class _VerificationState extends State<Verification> {
   final TextEditingController _otpController = TextEditingController();
   bool _isExpired = false;
   @override
+  void dispose() {
+    _otpController.dispose();
+    super.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: BlocConsumer<RegisterBloc, RegisterState>(

@@ -16,8 +16,10 @@ class _SizeComponentState extends State<SizeComponent> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: const Color.fromARGB(0, 255, 255, 255),
       margin: const EdgeInsets.only(top: 10),
       child: GridView.builder(
+        
         itemCount: widget.images.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
@@ -26,6 +28,7 @@ class _SizeComponentState extends State<SizeComponent> {
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             child: Card(
+              surfaceTintColor: Colors.transparent,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
                 side: const BorderSide(color: Colors.white, width: 6),

@@ -50,3 +50,8 @@ class RegisterOtpFailedState extends RegisterState{
 
 
 class ResendOtpState extends RegisterState{}
+
+class RegisterExceptionState extends RegisterState{
+  String errorMessage;
+  RegisterExceptionState({required this.errorMessage});
+}

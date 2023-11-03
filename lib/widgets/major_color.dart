@@ -28,6 +28,7 @@ class _MajorColorState extends State<MajorColor> {
               width: 100,
               height: 100,
               child: Card(
+                surfaceTintColor: Colors.transparent,
                 color: Color(int.parse(widget.colorCode[index] , radix: 16),),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10),side:const BorderSide(color: Colors.white , width: 6)),
                 elevation: 20,

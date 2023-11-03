@@ -79,3 +79,20 @@ class LogOutState extends SearchState{}
 
 
 class SearchExecptionState extends SearchState{}
+
+
+class BirdMoreInfoSuccessState extends SearchState{
+  String commonName;
+  String scintificName;
+  String kannadaName;
+  String diet;
+  String breedingSeason;
+  String image;
+  String identification;
+  BirdMoreInfoSuccessState({required this.commonName , required this.scintificName , required this.kannadaName , required this.image , required this.diet , required this.breedingSeason , required this.identification});
+}
+
+class BirdMoreInformationErrorState extends SearchState{
+  String errorMessage;
+  BirdMoreInformationErrorState({required this.errorMessage});
+}

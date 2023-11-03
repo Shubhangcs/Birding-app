@@ -44,3 +44,10 @@ class HomePageSearchDataEvent extends SearchEvent{
 }
 
 class LogOutEvent extends SearchEvent{}
+
+
+
+class BirdMoreInformationEvent extends SearchEvent{
+  String commonName;
+  BirdMoreInformationEvent({required this.commonName});
+}

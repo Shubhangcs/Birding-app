@@ -30,6 +30,7 @@ class _FootTypeState extends State<FootType> {
               width: 100,
               height: 100,
               child: Card(
+                surfaceTintColor: Colors.transparent,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                     side: const BorderSide(color: Colors.white, width: 6)),

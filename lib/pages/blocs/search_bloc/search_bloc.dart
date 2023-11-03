@@ -145,5 +145,23 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       box.delete('token');
       emit(LogOutState());
     });
+    on<BirdMoreInformationEvent>((event, emit) async{
+      try {
+        emit(SearchLoadingState());
+      final request = await http.get(Uri.parse("$birdDetails?commonName=${event.commonName}"));
+      final response = jsonDecode(request.body);
+      if(request.statusCode >= 400){
+       emit(BirdMoreInformationErrorState(errorMessage: response['error']));
+      }else{
+        if(response != null){
+           emit(BirdMoreInfoSuccessState(commonName: response['birdInfo']['commonName'], scintificName: response['birdInfo']['scientificName'], kannadaName: response['birdInfo']['kannadaName'], image: response['birdInfo']['imageSrc'], diet: response['birdInfo']['diet'], breedingSeason: response['birdInfo']['breedingSeason'], identification: response['birdInfo']['identification']));
+        }else{
+          emit(SearchExecptionState());
+        }
+      }
+      } catch (e) {
+        emit(SearchExecptionState());
+      }
+    });
   }
 }

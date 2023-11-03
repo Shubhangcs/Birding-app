@@ -18,6 +18,15 @@ class _RegisterState extends State<Register> {
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _lastNameController.dispose();
+    _firstNameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<RegisterBloc, RegisterState>(
@@ -30,6 +39,12 @@ class _RegisterState extends State<Register> {
         } else if (state is RegisterOtpState) {
           Navigator.pop(context);
           Navigator.pushReplacementNamed(context, '/verification');
+        }else if(state is RegisterFailedState){
+          Navigator.pop(context);
+          ScaffoldMessage.showScaffoldMessanger(context, state.errorMessage);
+        }else if(state is RegisterExceptionState){
+          Navigator.pop(context);
+          ScaffoldMessage.showScaffoldMessanger(context, state.errorMessage);
         }
       },
       builder: (context, state) {
@@ -116,7 +131,6 @@ class _RegisterState extends State<Register> {
                               cursorColor: const Color(0xFF40A858),
                               cursorOpacityAnimates: true,
                               cursorRadius: const Radius.circular(10),
-                              cursorHeight: 18,
                               onSubmitted: (event) {
                                 BlocProvider.of<RegisterBloc>(context).add(
                                     RegisterFirstNameTextChangedEvent(
@@ -169,7 +183,6 @@ class _RegisterState extends State<Register> {
                               cursorColor: const Color(0xFF40A858),
                               cursorOpacityAnimates: true,
                               cursorRadius: const Radius.circular(10),
-                              cursorHeight: 18,
                               onSubmitted: (event) {
                                 BlocProvider.of<RegisterBloc>(context).add(
                                     RegisterLastNameTextChangedEvent(
@@ -223,7 +236,6 @@ class _RegisterState extends State<Register> {
                             cursorColor: const Color(0xFF40A858),
                             cursorOpacityAnimates: true,
                             cursorRadius: const Radius.circular(10),
-                            cursorHeight: 18,
                             onSubmitted: (value) {
                               BlocProvider.of<RegisterBloc>(context).add(
                                 RegisterEmailTextChangedEvent(
@@ -285,7 +297,6 @@ class _RegisterState extends State<Register> {
                               cursorColor: const Color(0xFF40A858),
                               cursorOpacityAnimates: true,
                               cursorRadius: const Radius.circular(10),
-                              cursorHeight: 18,
                               onSubmitted: (event) {
                                 BlocProvider.of<RegisterBloc>(context).add(
                                     RegisterPasswordTextChangedEvent(

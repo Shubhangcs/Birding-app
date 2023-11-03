@@ -1,3 +1,4 @@
+import 'package:chirpp/pages/main/home/bird_page.dart';
 import 'package:chirpp/widgets/beak_type.dart';
 import 'package:chirpp/widgets/exception_widget.dart';
 import 'package:chirpp/widgets/final_search_result.dart';
@@ -82,6 +83,10 @@ class _SearchPageState extends State<SearchPage> {
           _showSkip = false;
           heading = "Final Results";
           component = FinalResult(birdData: state.birdList);
+        }else if(state is BirdMoreInfoSuccessState){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => BirdPage(commonName: state.commonName, scintificName: state.scintificName, kannadaName: state.kannadaName, breedingSeason: state.breedingSeason, diet: state.diet, identification: state.identification, image: state.image)));
+        }else if(state is BirdMoreInformationErrorState){
+          ScaffoldMessage.showScaffoldMessanger(context, state.errorMessage);
         }
       },
       builder: (context, state) {
@@ -103,12 +108,12 @@ class _SearchPageState extends State<SearchPage> {
               backgroundColor: const Color(0xFF40A858),
               elevation: 0,
               actions: [
-                Padding(padding:const EdgeInsets.only(top: 10 , right: 10),child:_showSkip?IconButton(onPressed: (){BlocProvider.of<SearchBloc>(context).add(event);}, icon:const Icon(Icons.skip_next , size: 40,),):null),
+                Padding(padding:const EdgeInsets.only(top: 10 , right: 10),child:_showSkip?IconButton(onPressed: (){BlocProvider.of<SearchBloc>(context).add(event);}, icon:const Icon(Icons.skip_next , size: 40, color: Colors.white,),):null),
                 Padding(
                   padding: const EdgeInsets.only(top: 10 , right: 10),
                   child: IconButton(onPressed: (){BlocProvider.of<SearchBloc>(context).add(SizeFetchEvent()); setState(() {
                     _showSkip = false;
-                  });}, icon:const Icon(Icons.restore , size: 40,),),
+                  });}, icon:const Icon(Icons.restore , size: 40, color: Colors.white,),),
                 ),
               ],
             ),

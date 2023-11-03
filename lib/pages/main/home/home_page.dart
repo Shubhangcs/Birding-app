@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../blocs/search_bloc/search_bloc.dart';
 
@@ -22,8 +23,11 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: const Color(0xFF40A858),
       appBar: AppBar(
-        title: const Text(
-          'Home Page',
+        title:  Padding(
+          padding: const EdgeInsets.only(top: 10),
+          child: Text(
+            'Home Page'
+          ,style: GoogleFonts.varelaRound(color: Colors.white , fontSize: 25 , fontWeight: FontWeight.bold)),
         ),
         actions: [
           BlocBuilder<SearchBloc, SearchState>(
@@ -35,9 +39,13 @@ class _HomePageState extends State<HomePage> {
                     delegate: CustomSearch(searchBloc: widget.searchBloc),
                   );
                 },
-                icon: const Icon(
-                  Icons.search_rounded,
-                  size: 30,
+                icon:const Padding(
+                  padding: EdgeInsets.only(top: 10),
+                  child: Icon(
+                    Icons.search_rounded,
+                    size: 30,
+                    color: Colors.white,
+                  ),
                 ),
               );
             },
@@ -53,7 +61,7 @@ class _HomePageState extends State<HomePage> {
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        margin: const EdgeInsets.only(top: 5),
+        margin: const EdgeInsets.only(top: 15),
         decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(

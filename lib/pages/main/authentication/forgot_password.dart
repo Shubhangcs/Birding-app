@@ -16,7 +16,11 @@ class ForgotPassword extends StatefulWidget {
 class _ForgotPasswordState extends State<ForgotPassword> {
   bool _isExpired = false;
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _otpController = TextEditingController();
+   @override
+  void dispose() {
+    _emailController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -32,6 +36,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             Navigator.pushReplacementNamed(context, '/passwordChange');
           }else if(state is ForgotPasswordOtpValidState){
             Navigator.pop(context);
+          }else if(state is ForgotPasswordOtpInvalidState){
+            Navigator.pop(context);
+            ScaffoldMessage.showScaffoldMessanger(context , state.errorMessage);
+          }else if(state is ExecptionState){
+            Navigator.pop(context);
+            ScaffoldMessage.showScaffoldMessanger(context , state.errorMessage);
           }
         },
         builder: (context, state) {

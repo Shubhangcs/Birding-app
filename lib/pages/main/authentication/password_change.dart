@@ -17,6 +17,13 @@ class _PasswordChangeState extends State<PasswordChange> {
   final TextEditingController _confirmPasswordController = TextEditingController();
   bool _newPassword = true;
   bool _confirmPassword = true;
+
+  @override
+  void dispose() {
+    _newPasswordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return BlocListener<LoginBloc, LoginBlocState>(

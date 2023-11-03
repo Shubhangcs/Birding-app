@@ -16,6 +16,13 @@ class _LoginState extends State<Login> {
   bool _showPassword = true;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -121,7 +128,6 @@ class _LoginState extends State<Login> {
                             cursorColor: const Color(0xFF40A858),
                             cursorOpacityAnimates: true,
                             cursorRadius: const Radius.circular(10),
-                            cursorHeight: 18,
                             onSubmitted: (value) {
                               BlocProvider.of<LoginBloc>(context).add(
                                 LoginEmailTextChangedEvent(
@@ -187,7 +193,6 @@ class _LoginState extends State<Login> {
                               cursorColor: const Color(0xFF40A858),
                               cursorOpacityAnimates: true,
                               cursorRadius: const Radius.circular(10),
-                              cursorHeight: 18,
                               onSubmitted: (event) {
                                 BlocProvider.of<LoginBloc>(context).add(
                                     LoginPasswordTextChangedEvent(
@@ -263,7 +268,7 @@ class _LoginState extends State<Login> {
                       backgroundColor: const MaterialStatePropertyAll(
                         Colors.white,
                       ),
-                      elevation: const MaterialStatePropertyAll(5),
+                      elevation: const MaterialStatePropertyAll(0),
                       shadowColor: const MaterialStatePropertyAll(
                         Color(0xFF40A858),
                       ),

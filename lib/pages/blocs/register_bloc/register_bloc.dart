@@ -68,7 +68,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         }
       }
       } catch (e) {
-          emit(RegisterOtpFailedState(errorMessage: 'Something Went Wrong'));
+          emit(RegisterExceptionState(errorMessage: 'Somthing went wrong'));
       }
     });
     on<ResendOtpEvent>((event, emit)async{
@@ -89,8 +89,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
           await box.close();
         }
       } catch (e) {
-                  emit(RegisterOtpFailedState(
-              errorMessage: 'Something went wrong'));
+                emit(RegisterExceptionState(errorMessage: 'Somthing went wrong'));
       }
     });
     on<RegisterOtpEvent>((event, emit) async {
@@ -122,7 +121,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
          await box.close();
       } 
      } catch (e) {
-       emit(RegisterOtpFailedState(errorMessage: e.toString()));
+       emit(RegisterExceptionState(errorMessage: 'Somthing went wrong'));
      }
     });
   }
