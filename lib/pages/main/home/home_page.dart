@@ -1,3 +1,5 @@
+import 'package:chirpp/pages/main/home/search_feild.dart';
+import 'package:chirpp/pages/main/home/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -5,8 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../blocs/search_bloc/search_bloc.dart';
 
 class HomePage extends StatefulWidget {
-  final Bloc searchBloc;
-  const HomePage({super.key, required this.searchBloc});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -18,41 +19,41 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     BlocProvider.of<SearchBloc>(context);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF40A858),
       appBar: AppBar(
-        title:  Padding(
+        title: Padding(
           padding: const EdgeInsets.only(top: 10),
-          child: Text(
-            'Home Page'
-          ,style: GoogleFonts.varelaRound(color: Colors.white , fontSize: 25 , fontWeight: FontWeight.bold)),
+          child: Text('Home Page',
+              style: GoogleFonts.varelaRound(
+                  color: Colors.white,
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold)),
         ),
         actions: [
-          BlocBuilder<SearchBloc, SearchState>(
-            builder: (context, state) {
-              return IconButton(
-                onPressed: () {
-                  showSearch(
-                    context: context,
-                    delegate: CustomSearch(searchBloc: widget.searchBloc),
-                  );
-                },
-                icon:const Padding(
-                  padding: EdgeInsets.only(top: 10),
-                  child: Icon(
-                    Icons.search_rounded,
-                    size: 30,
-                    color: Colors.white,
-                  ),
-                ),
-              );
+          IconButton(
+            icon: const Padding(
+              padding: EdgeInsets.only(top: 8, right: 10),
+              child: Icon(
+                Icons.search_rounded,
+                color: Colors.white,
+                size: 40,
+              ),
+            ),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => BlocProvider(
+                            create: (context) => SearchBloc(),
+                            child: SearchField(),
+                          ),
+                      fullscreenDialog: true));
             },
-          ),
-          const SizedBox(
-            width: 15,
-          ),
+          )
         ],
         automaticallyImplyLeading: false,
         backgroundColor: const Color(0xFF40A858),
@@ -70,79 +71,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class CustomSearch extends SearchDelegate {
-  final List responses = ["Bhavani", "Bhandari", "Sumith"];
-  final dynamic searchBloc;
-  CustomSearch({required this.searchBloc});
-  @override
-  List<Widget>? buildActions(BuildContext context) {
-    return [
-      IconButton(
-        onPressed: () {
-          query = '';
-        },
-        icon: const Icon(Icons.clear),
-      ),
-    ];
-  }
-
-  @override
-  Widget? buildLeading(BuildContext context) {
-    return IconButton(
-      onPressed: () {
-        close(context, null);
-      },
-      icon: const Icon(Icons.arrow_back_ios),
-    );
-  }
-
-  @override
-  Widget buildResults(BuildContext context) {
-    if (query.isNotEmpty) {
-      searchBloc.add(HomePageSearchDataEvent(query: query));
-    }
-    return BlocBuilder<SearchBloc, SearchState>(
-      builder: (context, state) {
-        return ListView.builder(
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: (state is HomePageSearchDataFetchState)
-                  ? Text(state.data[index])
-                  : null,
-              trailing: const Icon(Icons.arrow_outward_rounded),
-            );
-          },
-          itemCount:
-              (state is HomePageSearchDataFetchState) ? state.data.length : 0,
-        );
-      },
-    );
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    if (query.isNotEmpty) {
-      searchBloc.add(HomePageSearchDataEvent(query: query));
-    }
-    return BlocBuilder<SearchBloc, SearchState>(
-      builder: (context, state) {
-        return ListView.builder(
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: (state is HomePageSearchDataFetchState)
-                  ? Text(state.data[index])
-                  : null,
-              trailing: const Icon(Icons.arrow_outward_rounded),
-            );
-          },
-          itemCount:
-              (state is HomePageSearchDataFetchState) ? state.data.length : 0,
-        );
-      },
     );
   }
 }

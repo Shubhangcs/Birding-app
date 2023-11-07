@@ -1,4 +1,3 @@
-import 'package:chirpp/pages/main/home/bird_page.dart';
 import 'package:chirpp/widgets/beak_type.dart';
 import 'package:chirpp/widgets/exception_widget.dart';
 import 'package:chirpp/widgets/final_search_result.dart';
@@ -12,6 +11,7 @@ import '../../../../widgets/foot_type.dart';
 import '../../../../widgets/major_color.dart';
 import '../../../../widgets/minor_color.dart';
 import '../../blocs/search_bloc/search_bloc.dart';
+import 'bird_page.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});

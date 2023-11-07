@@ -26,150 +26,113 @@ class BirdPage extends StatefulWidget {
 class _BirdPageState extends State<BirdPage> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: const Color(0xFF40A858),
-        appBar: AppBar(
-          leading:  Padding(
-            padding:const EdgeInsets.only(top: 10),
-            child: GestureDetector(
-              child:const Icon(
-                Icons.arrow_back_sharp,
-                color: Colors.white,
-                weight: 5,
-              ),
-              onTap: (){Navigator.pop(context);},
-            ),
-          ),
-          automaticallyImplyLeading: false,
-          title: Padding(
-            padding: const EdgeInsets.only(top: 10),
-            child: Text(
-              'About',
-              style: GoogleFonts.varelaRound(
-                  color: Colors.white, fontWeight: FontWeight.bold),
-            ),
-          ),
-          backgroundColor: const Color(0xFF40A858),
-          elevation: 0,
+    return Scaffold(
+      backgroundColor: Colors.green,
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_sharp , color: Colors.white, size: 30),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
-        body: Container(
-          margin: const EdgeInsets.only(top: 15),
+        backgroundColor: Colors.transparent,
+        title: Text(
+          "Bird Page",
+          style: GoogleFonts.varelaRound(
+              color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
+        ),
+      ),
+      body: Container(
+        decoration:const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(topLeft: Radius.circular(20) , topRight: Radius.circular(20)),
+        ),
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Expanded(
-                flex: 0,
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20)),
-                  child: Image.network(widget.image),
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  color: Colors.white,
-                  width: MediaQuery.of(context).size.width,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width,
-                          height: 280,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 15, left: 15, bottom: 15),
-                                child: Text(
-                                  widget.commonName,
-                                  style: GoogleFonts.varelaRound(
-                                      color: Colors.black,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 15, bottom: 20),
-                                child: Text(
-                                  widget.scintificName,
-                                  style: GoogleFonts.varelaRound(
-                                      color: Colors.grey,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      fontStyle: FontStyle.italic),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 15, bottom: 20),
-                                child: Text(
-                                  widget.kannadaName,
-                                  style: GoogleFonts.varelaRound(
-                                      color: Colors.grey,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 15, bottom: 20),
-                                child: Text(
-                                  'Breeding Season: ${widget.breedingSeason}',
-                                  style: GoogleFonts.varelaRound(
-                                      color: Colors.grey,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 15, bottom: 20),
-                                child: Text(
-                                  'Diet: ${widget.diet}',
-                                  style: GoogleFonts.varelaRound(
-                                      color: Colors.grey,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 15, left: 15, bottom: 15),
-                              child: Text(
-                                'Identification',
-                                style: GoogleFonts.varelaRound(
-                                  color: Colors.black,
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 2, left: 15, bottom: 15, right: 15),
-                              child: Text(
-                                widget.identification,
-                                style: GoogleFonts.varelaRound(
-                                  color: Colors.black,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+              ClipRRect(child: Image.network(widget.image),borderRadius: BorderRadius.only(topLeft: Radius.circular(20) , topRight: Radius.circular(20)),),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 15, left: 15, bottom: 15),
+                    child: Text(
+                      widget.commonName,
+                      style: GoogleFonts.varelaRound(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
-                ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15, bottom: 20),
+                    child: Text(
+                      widget.scintificName,
+                      style: GoogleFonts.varelaRound(
+                          color: Colors.grey,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          fontStyle: FontStyle.italic),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15, bottom: 20),
+                    child: Text(
+                      widget.kannadaName,
+                      style: GoogleFonts.varelaRound(
+                          color: Colors.grey,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15, bottom: 20),
+                    child: Text(
+                      'Breeding Season: ${widget.breedingSeason}',
+                      style: GoogleFonts.varelaRound(
+                          color: Colors.grey,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15, bottom: 20),
+                    child: Text(
+                      'Diet: ${widget.diet}',
+                      style: GoogleFonts.varelaRound(
+                          color: Colors.grey,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 15, left: 15, bottom: 15),
+                    child: Text(
+                      'Identification',
+                      style: GoogleFonts.varelaRound(
+                        color: Colors.black,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 2, left: 15, bottom: 15, right: 15),
+                    child: Text(
+                      widget.identification,
+                      style: GoogleFonts.varelaRound(
+                        color: Colors.black,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

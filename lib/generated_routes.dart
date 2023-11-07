@@ -44,7 +44,7 @@ class Routes {
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
                   create: (context) => SearchBloc(),
-                  child:  HomePage(searchBloc: SearchBloc(),),
+                  child:const  HomePage(),
                 ));
       case "/birdPage":
         return MaterialPageRoute(

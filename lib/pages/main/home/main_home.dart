@@ -25,12 +25,10 @@ class _MainHomeState extends State<MainHome> {
           backgroundColor:const Color(0xFF40A858),
           body: IndexedStack(
             index: _pageIndex,
-            children: [
-               HomePage(
-                searchBloc: SearchBloc(),
-               ),
-             const SearchPage(),
-              const SettingsPage(),
+            children:const [
+              HomePage(),
+              SearchPage(),
+               SettingsPage(),
             ],
           ),
           bottomNavigationBar: CurvedNavigationBar(
