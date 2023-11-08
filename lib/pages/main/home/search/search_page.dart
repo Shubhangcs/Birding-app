@@ -1,16 +1,16 @@
-import 'package:chirpp/widgets/beak_type.dart';
+import 'package:chirpp/widgets/search/beak_type.dart';
 import 'package:chirpp/widgets/exception_widget.dart';
-import 'package:chirpp/widgets/final_search_result.dart';
-import 'package:chirpp/widgets/size_component.dart';
+import 'package:chirpp/widgets/search/final_search_result.dart';
+import 'package:chirpp/widgets/search/size_component.dart';
 import 'package:chirpp/widgets/scaffold_messanger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import '../../../../widgets/foot_type.dart';
-import '../../../../widgets/major_color.dart';
-import '../../../../widgets/minor_color.dart';
-import '../../blocs/search_bloc/search_bloc.dart';
+import '../../../../widgets/search/foot_type.dart';
+import '../../../../widgets/search/major_color.dart';
+import '../../../../widgets/search/minor_color.dart';
+import '../../../blocs/search_bloc/search_bloc.dart';
 import 'bird_page.dart';
 
 class SearchPage extends StatefulWidget {

@@ -35,14 +35,6 @@ class SearchFinalRequestEvent extends SearchEvent{
 }
 
 
-
-
-
-class HomePageSearchDataEvent extends SearchEvent{
-  String query;
-  HomePageSearchDataEvent({required this.query});
-}
-
 class LogOutEvent extends SearchEvent{}
 
 
@@ -50,4 +42,10 @@ class LogOutEvent extends SearchEvent{}
 class BirdMoreInformationEvent extends SearchEvent{
   String commonName;
   BirdMoreInformationEvent({required this.commonName});
+}
+
+
+class HomePageSearchTriggerEvent extends SearchEvent{
+  String query;
+  HomePageSearchTriggerEvent({required this.query});
 }

@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../pages/blocs/search_bloc/search_bloc.dart';
+import '../../pages/blocs/search_bloc/search_bloc.dart';
 
 
 
-class BeakType extends StatefulWidget {
+class FootType extends StatefulWidget {
   final dynamic images;
-  const BeakType({super.key , required this.images});
+  const FootType({super.key , required this.images});
 
   @override
-  State<BeakType> createState() => _BeakTypeState();
+  State<FootType> createState() => _FootTypeState();
 }
 
-class _BeakTypeState extends State<BeakType> {
+class _FootTypeState extends State<FootType> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -54,7 +54,7 @@ class _BeakTypeState extends State<BeakType> {
             ),
             onTap: () {
               BlocProvider.of<SearchBloc>(context).add(
-                FootTypeFetchEvent(beakType: widget.images[index]['value'])
+                SearchFinalRequestEvent(footType: widget.images[index]['value'])
               );
             },
           );

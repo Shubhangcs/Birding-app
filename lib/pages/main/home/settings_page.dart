@@ -64,6 +64,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       margin: const EdgeInsets.only(top: 20, bottom: 20),
                       width: double.infinity,
                       child: Card(
+                        surfaceTintColor: Colors.transparent,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),

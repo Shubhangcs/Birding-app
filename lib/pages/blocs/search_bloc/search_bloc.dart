@@ -163,5 +163,20 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         emit(SearchExecptionState());
       }
     });
+
+    on<HomePageSearchTriggerEvent>((event, emit) async {
+      try {
+        emit(HomePageFetchDataLoadingState());
+        final request = await http.get(Uri.parse("$liveSearch?query=${event.query}"));
+        final response = jsonDecode(request.body);
+        if(response['results'].length == 0){
+          emit(HomePageFetchDataErrorState(errorMessage: "Result not found"));
+        }else{
+          emit(HomePageFetchDataSuccessState(data: response['results']));
+        }
+      } catch (e) {
+        emit(HomePageFetchDataErrorState(errorMessage: "Something Went Wrong"));
+      }
+    });
   }
 }

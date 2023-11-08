@@ -2,7 +2,7 @@ import 'package:chirpp/pages/blocs/register_bloc/register_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../../widgets/loading_dialog.dart';
+import '../../../widgets/loading_dialog.dart';
 import '../../../../widgets/scaffold_messanger.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 

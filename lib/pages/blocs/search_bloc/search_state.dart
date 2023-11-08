@@ -69,12 +69,6 @@ class SearchErrorState extends SearchState{
 }
 
 
-class HomePageSearchDataFetchState extends SearchState{
-  dynamic data;
-  HomePageSearchDataFetchState({required this.data});
-}
-
-
 class LogOutState extends SearchState{}
 
 
@@ -96,3 +90,16 @@ class BirdMoreInformationErrorState extends SearchState{
   String errorMessage;
   BirdMoreInformationErrorState({required this.errorMessage});
 }
+
+
+class HomePageFetchDataSuccessState extends SearchState{
+  dynamic data;
+  HomePageFetchDataSuccessState({required this.data});
+}
+
+class HomePageFetchDataErrorState extends SearchState{
+  String errorMessage;
+  HomePageFetchDataErrorState({required this.errorMessage});
+}
+
+class HomePageFetchDataLoadingState extends SearchState{}

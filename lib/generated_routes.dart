@@ -10,7 +10,7 @@ import 'pages/main/authentication/login.dart';
 import 'pages/main/authentication/password_change.dart';
 import 'pages/main/authentication/register.dart';
 import 'pages/main/authentication/verification.dart';
-import 'pages/main/home/home_page.dart';
+import 'pages/main/home/start/home_page.dart';
 import 'pages/main/home/settings_page.dart';
 import 'pages/main/sub_pages/bird_page.dart';
 

@@ -1,10 +1,10 @@
-import 'package:chirpp/pages/main/home/search_feild.dart';
-import 'package:chirpp/pages/main/home/search_page.dart';
+import 'package:chirpp/pages/main/home/start/search_feild.dart';
+import 'package:chirpp/pages/main/home/search/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../blocs/search_bloc/search_bloc.dart';
+import '../../../blocs/search_bloc/search_bloc.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

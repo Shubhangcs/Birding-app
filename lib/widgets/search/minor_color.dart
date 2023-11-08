@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../pages/blocs/search_bloc/search_bloc.dart';
+import '../../pages/blocs/search_bloc/search_bloc.dart';
 
 
 class MinorColor extends StatefulWidget {
