@@ -1,7 +1,5 @@
-import 'package:chirpp/pages/blocs/login_bloc/login_bloc_bloc.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import '../../blocs/search_bloc/search_bloc.dart';
 import 'start/home_page.dart';
 import 'search/search_page.dart';
 import 'settings_page.dart';
